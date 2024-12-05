@@ -1,0 +1,7 @@
+services:
+
+  test-cypress-chromium:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    command: npx cypress run -b chromium
