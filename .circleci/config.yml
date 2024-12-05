@@ -8,6 +8,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: install dependencies
+          command: npm ci
+          working_directory: examples/chromium
+      - run:
           name: test
           command: |
             docker compose run --rm --build test-cypress-chromium
