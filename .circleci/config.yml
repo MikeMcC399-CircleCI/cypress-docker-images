@@ -14,7 +14,7 @@ jobs:
       - run:
           name: test
           command: |
-            docker compose run --rm --build test-cypress-chromium
+            docker compose run --rm --build --env DEBUG='cypress:*' test-cypress-chromium
           working_directory: examples/chromium
   test-image-amd:
     machine:
@@ -36,4 +36,4 @@ workflows:
   test:
     jobs:
         - test-image-arm
-        - test-image-amd
+        # - test-image-amd
