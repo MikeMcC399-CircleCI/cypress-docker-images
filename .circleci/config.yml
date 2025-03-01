@@ -8,14 +8,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: install dependencies
-          command: npm ci
-          working_directory: examples/chromium
-      - run:
           name: test
           command: |
-            docker compose run --rm --build test-cypress-chromium
-          working_directory: examples/chromium
+            docker run -it --rm -v .:/app -w /app cypress/included
+          working_directory: examples/basic-mini
   test-image-amd:
     machine:
       image: ubuntu-2204:2024.11.1
@@ -23,14 +19,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: install dependencies
-          command: npm ci
-          working_directory: examples/chromium
-      - run:
           name: test
           command: |
-            docker compose run --rm --build test-cypress-chromium
-          working_directory: examples/chromium
+            docker run -it --rm -v .:/app -w /app cypress/included
+          working_directory: examples/basic-mini
 
 workflows:
   test:
