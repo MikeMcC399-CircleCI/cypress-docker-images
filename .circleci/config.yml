@@ -1,0 +1,39 @@
+version: 2.1
+
+jobs:
+  test-image-arm:
+    machine:
+      image: ubuntu-2204:2024.11.1
+    resource_class: arm.medium
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: npm ci
+          working_directory: examples/chromium
+      - run:
+          name: test
+          command: |
+            docker compose run --rm --build test-cypress-chromium
+          working_directory: examples/chromium
+  test-image-amd:
+    machine:
+      image: ubuntu-2204:2024.11.1
+    resource_class: medium
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: npm ci
+          working_directory: examples/chromium
+      - run:
+          name: test
+          command: |
+            docker compose run --rm --build test-cypress-chromium
+          working_directory: examples/chromium
+
+workflows:
+  test:
+    jobs:
+        - test-image-arm
+        - test-image-amd
