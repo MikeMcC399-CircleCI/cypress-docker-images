@@ -234,13 +234,13 @@ jobs:
                     # "mediaType": "application/vnd.oci.image.index.v1+json"
                     export BUILDX_NO_DEFAULT_ATTESTATIONS=1
 
-                    docker login -u "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASS"
+                    # docker login -u "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASS"
                     docker buildx bake -f ./docker-compose.yml --progress plain --set *.platform=linux/arm64,linux/amd64 --push << parameters.target >>
 
                     ## now, let's re-build those same images for Amazon ECR this is basically a re-tag and push because of the cache from the previous build.
                     ## see https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html
-                    docker login --username AWS --password "$(aws ecr-public get-login-password --region $AWS_ECR_REGION)" $AWS_ECR_PREFIX
-                    REPO_PREFIX=$AWS_ECR_PREFIX/ docker buildx bake -f ./docker-compose.yml --progress plain --set *.platform=linux/arm64,linux/amd64 --push << parameters.target >>
+                    # docker login --username AWS --password "$(aws ecr-public get-login-password --region $AWS_ECR_REGION)" $AWS_ECR_PREFIX
+                    # REPO_PREFIX=$AWS_ECR_PREFIX/ docker buildx bake -f ./docker-compose.yml --progress plain --set *.platform=linux/arm64,linux/amd64 --push << parameters.target >>
 
                 working_directory: factory
 
@@ -361,6 +361,7 @@ workflows:
                         # if publishing an alternate (non-primary) version
                         # This job must run because the base, browsers and included jobs depend on it
                             - master
+                            - test/arm-release
                 requires:
                     - factory
                     - factory-arm
@@ -377,6 +378,7 @@ workflows:
                         # Change to a feature branch such as <cypress-version>-node-<node.js version>-publish
                         # if publishing an alternate version
                             - master
+                            - test/arm-release
                 requires:
                     - "Push Factory Image"
                     - base
@@ -392,6 +394,7 @@ workflows:
                         # Change to a feature branch such as <cypress-version>-node-<node.js version>-publish
                         # if publishing an alternate version
                             - master
+                            - test/arm-release
                 requires:
                     - "Push Factory Image"
                     - browsers
@@ -407,6 +410,7 @@ workflows:
                         # Change to a feature branch such as <cypress-version>-node-<node.js version>-publish
                         # if publishing an alternate version
                             - master
+                            - test/arm-release
                 requires:
                     - "Push Factory Image"
                     - included
