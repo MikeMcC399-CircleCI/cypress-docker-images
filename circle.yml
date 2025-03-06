@@ -235,7 +235,7 @@ jobs:
                     export BUILDX_NO_DEFAULT_ATTESTATIONS=1
 
                     # docker login -u "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASS"
-                    docker buildx bake -f ./docker-compose.yml --progress plain --set *.platform=linux/arm64,linux/amd64 --push << parameters.target >>
+                    docker buildx bake -f ./docker-compose.yml --progress plain --set *.platform=linux/arm64,linux/amd64 << parameters.target >>
 
                     ## now, let's re-build those same images for Amazon ECR this is basically a re-tag and push because of the cache from the previous build.
                     ## see https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html
