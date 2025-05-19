@@ -1,5 +1,9 @@
 # Change log
 
+## 5.10.0
+
+- Build geckodriver into cypress/browsers and cypress/included images. Addresses [#1354](https://github.com/cypress-io/cypress-docker-images/issues/1354).
+
 ## 5.9.0
 
 - Added ability to install geckodriver with `GECKODRIVER_VERSION`. Addresses [#1351](https://github.com/cypress-io/cypress-docker-images/issues/1351).
