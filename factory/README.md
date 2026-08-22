@@ -96,7 +96,10 @@ Example: `CHROME_FOR_TESTING_VERSION='150.0.7871.24'`
 
 Refer to [Chrome for Testing availability](https://googlechromelabs.github.io/chrome-for-testing/) for current versions or [available downloads](https://googlechromelabs.github.io/chrome-for-testing/files) for other versions.
 
-The parameter `CHROME_FOR_TESTING_VERSION` can be used for custom-built images based on `cypress/factory`. The browser is however not currently built into `cypress/browsers` or `cypress/included` images and is currently available only for the `Linux/amd64` platform.
+The parameter `CHROME_FOR_TESTING_VERSION` can be used for custom-built images based on `cypress/factory`.
+The browser is however not currently built into `cypress/browsers` or `cypress/included` images.
+Chrome for Testing is available for the `linux/amd64` platform for all versions.
+For the `linux/arm64` platform, the lowest available version is `153.0.8001.0`.
 
 ### FIREFOX_VERSION
 
